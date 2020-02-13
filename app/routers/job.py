@@ -13,11 +13,17 @@ router = APIRouter()
 logging.getLogger("job")
 
 def task(id:str, db_table:str, hive_table:str, file_path:str):
-    if hive_table is not None and file_path is None:
-        file_path, status_code = hive_operation.generate_csv(hive_table, id)
-    if file_path is not None and status_code == 0:
+    status_code = 1
+
+    if file_path is not None:
         _ = database.load_into_db(db_table, file_path, id)
-        os.remove(file_path)
+
+    else:
+        if hive_table is not None and file_path is None:
+            file_path, status_code = hive_operation.generate_tsv(hive_table, id)
+            if status_code == 0:
+                _ = database.load_into_db(db_table, file_path, id)
+                os.remove(file_path)
     queue.remove_queue(db_table)
 
 
@@ -52,4 +58,4 @@ async def submit_job(job:JobSubmission, response:Response, background_task:Backg
 
 @router.get("/migrate/", tags=["job"])
 async def get_job():
-    return queue.list()
+    return queue.list_all()

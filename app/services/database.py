@@ -19,7 +19,7 @@ def load_into_db(table:str, file_path:str, id:str) -> int:
 
     logging.debug("Database connection is successfully created")
 
-    query = '''LOAD DATA LOCAL INFILE '{}' INTO TABLE {} FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;'''.format(file_path, table)
+    query = '''LOAD DATA LOCAL INFILE '{}' INTO TABLE {} FIELDS TERMINATED BY '\t' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;'''.format(file_path, table)
 
     try:
         with db_conn.cursor() as cursor:

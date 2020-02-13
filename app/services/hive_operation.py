@@ -7,18 +7,18 @@ import setting
 
 logging.getLogger('hive_operation')
 
-def generate_csv(hive_table:str, id:str) -> Dict[object,int]:
+def generate_tsv(hive_table:str, id:str) -> Dict[object,int]:
     return_code = 1
     file_path = None
     try:
-        logging.info("Task id:{}. Start extracting hive table to csv format of table: {}".format(id, hive_table))
+        logging.info("Task id:{}. Start extracting hive table to tsv format of table: {}".format(id, hive_table))
         env = {'HADOOP_CLIENT_OPTS':'-Djline.terminal=jline.UnsupportedTerminal'}
 
         BEELINE_CMD='beeline ' \
                     '-u "jdbc:hive2://{}/;serviceDiscoveryMode=zooKeeper;hive.server2.proxy.user={}" ' \
-                    '--silent=true --outputformat=csv2'.format(setting.HIVE_URL, setting.PROXY_USER)
+                    '--silent=true --outputformat=tsv2'.format(setting.HIVE_URL, setting.PROXY_USER)
 
-        file_path = "{}/{}.csv".format(setting.TEMP_PATH,hive_table)
+        file_path = "{}/{}.tsv".format(setting.TEMP_PATH,hive_table)
 
         process = subprocess.run(
                         '{0} -f "select * from {1}" > {}'.format(BEELINE_CMD, hive_table, file_path),
@@ -30,13 +30,13 @@ def generate_csv(hive_table:str, id:str) -> Dict[object,int]:
             logging.info("Task id:{}. Succesfully extracted hive table of table: {}".format(id, hive_table))
         else:
             logging.error(
-                    "Task id:{}. Failed to generate csv file of table:{}".format(
+                    "Task id:{}. Failed to generate tsv file of table:{}".format(
                         id, hive_table
                     ))
 
     except Exception as e:
         logging.error(
-                    "Task id:{}. Failed to generate csv file of table:{}".format(
+                    "Task id:{}. Failed to generate tsv file of table:{}".format(
                         id, hive_table
                     ))
 

@@ -16,5 +16,5 @@ def in_queue(db_table:str) -> bool:
 def remove_queue(db_table:str) -> None:
     WORKING_QUEUE.pop(db_table)
 
-def list() -> Dict[str,str]:
+def list_all() -> Dict[str,str]:
     return WORKING_QUEUE
