@@ -11,6 +11,7 @@ temp.sql
 test.py
 *.csv
 tmp/
+*.db
 
 # pycharm
 .idea/

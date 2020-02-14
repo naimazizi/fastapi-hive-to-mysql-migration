@@ -7,6 +7,8 @@ DB_USERNAME = config("DB_USERNAME", cast=str, default="root")
 DB_PASSWORD = config("DB_PASSWORD", cast=str, default="root")
 DB_NAME = config("DB_NAME", cast=str, default="default")
 
+SQLITE_DB_PATH = config("SQLITE_DB_PATH", cast=str, default="./status.db")
+
 SLACK_WEBHOOK_URL = config("SLACK_WEBHOOK_URL", cast=str, default="slack.com")
 
 HIVE_URL = config("HIVE_URL", cast=str, default="localhost:2181")
