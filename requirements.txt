@@ -21,7 +21,7 @@ kombu==4.6.3
 MarkupSafe==1.1.1
 promise==2.2.1
 pycparser==2.19
-pydantic==1.2
+pydantic==1.6.2
 PyMySQL==0.9.3
 pyOpenSSL==19.1.0
 PySocks==1.7.1
