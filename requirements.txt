@@ -8,7 +8,7 @@ cffi==1.13.2
 chardet==3.0.4
 Click==7.0
 cryptography==2.8
-fastapi==0.45.0
+fastapi==0.65.2
 graphene==2.1.8
 graphql-core==2.2
 graphql-relay==2.0.1
